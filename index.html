@@ -71,19 +71,19 @@ section{position:relative;z-index:1}
 /* ===== NAV ===== */
 nav{
   position:sticky;top:0;z-index:50;
-  display:flex;align-items:center;justify-content:space-between;
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:20px;
   padding:14px clamp(18px,4vw,56px);
   background:color-mix(in srgb,var(--bg) 84%,transparent);
   backdrop-filter:blur(14px);
   border-bottom:1px solid var(--line);
 }
-.brand{display:flex;align-items:center;gap:13px;text-decoration:none}
+.brand{display:flex;align-items:center;gap:13px;text-decoration:none;justify-self:start}
 .medallion{width:42px;height:42px;flex:0 0 auto;border-radius:50%;object-fit:cover;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
 .brand-text{display:flex;flex-direction:column;line-height:1}
 .brand-text .name{font-family:'Anton',sans-serif;font-weight:400;font-size:1.2rem;color:var(--text);letter-spacing:.5px;text-transform:uppercase}
 .brand-text .sub{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-top:3px}
-.nav-right{display:flex;align-items:center;gap:12px}
-.nav-links{display:flex;gap:26px;margin-right:14px}
+.nav-right{display:flex;align-items:center;gap:12px;justify-self:end}
+.nav-links{display:flex;gap:26px;justify-self:center}
 .nav-links a{color:var(--muted);text-decoration:none;font-size:.86rem;letter-spacing:.5px;transition:color .25s;position:relative}
 .nav-links a:hover{color:var(--text)}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--gold);transition:width .3s}
@@ -169,8 +169,10 @@ nav{
 .item{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line)}
 .item:last-child{border-bottom:none}
 .item .iname{font-weight:500;font-size:.95rem}
-.item .iname small{display:block;color:var(--muted);font-size:.74rem;font-style:italic;font-weight:400}
-.item .price{font-weight:700;color:var(--gold);white-space:nowrap}
+.item .iname .compo{display:block;color:var(--muted);font-size:.74rem;font-style:italic;font-weight:400}
+.item .iname .translit{display:none;color:var(--gold-bright);font-size:.72rem;font-style:italic;font-weight:400;margin-top:2px}
+body.lang-en .item .iname .translit{display:block}
+.item .price{font-weight:700;color:var(--gold);white-space:nowrap;font-variant-numeric:tabular-nums}
 .extras-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 30px}
 .menu-note{margin-top:16px;font-size:.82rem;color:var(--muted);background:var(--surface2);padding:10px 14px;border-radius:10px;border-left:3px solid var(--gold)}
 
@@ -229,8 +231,8 @@ nav{
 .map-note{margin-top:14px;font-size:.86rem;color:var(--muted);display:flex;gap:9px;align-items:flex-start;line-height:1.5;padding:0 4px}
 .map-note .pin{color:var(--green-soft);font-size:1rem;flex:0 0 auto;margin-top:1px}
 .socials{display:flex;gap:10px;margin-top:6px}
-.soc{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:var(--surface);border:1px solid var(--line);font-size:1.1rem;transition:transform .2s,border-color .2s}
-.soc:hover{transform:translateY(-3px);border-color:var(--gold)}
+.soc{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:var(--surface);border:1px solid var(--line);color:var(--text);transition:transform .2s,border-color .2s,color .2s}
+.soc:hover{transform:translateY(-3px);border-color:var(--gold);color:var(--gold)}
 
 /* ===== FOOTER ===== */
 footer{background:var(--bg);border-top:1px solid var(--line);padding:48px 20px 36px;text-align:center}
@@ -247,7 +249,7 @@ footer .credit{color:var(--muted);font-size:.72rem;margin-top:22px;opacity:.7}
 }
 @media(max-width:760px){
   .nav-links{display:none}
-  nav{padding:12px 16px}
+  nav{grid-template-columns:auto auto;padding:12px 16px}
   .order-btn{padding:9px 16px;font-size:.76rem}
   .brand-text .name{font-size:1rem}
   .r-card{flex-basis:290px;padding:24px 22px}
@@ -273,20 +275,20 @@ footer .credit{color:var(--muted);font-size:.72rem;margin-top:22px;opacity:.7}
       <span class="sub" data-i18n="brand_sub">Burgers · Katy, TX</span>
     </span>
   </a>
+  <div class="nav-links">
+    <a href="#menu" data-i18n="nav_menu">Menú</a>
+    <a href="#reviews" data-i18n="nav_reviews">Reseñas</a>
+    <a href="#hours" data-i18n="nav_hours">Horario</a>
+    <a href="#findus" data-i18n="nav_visit">Visítanos</a>
+  </div>
   <div class="nav-right">
-    <div class="nav-links">
-      <a href="#menu" data-i18n="nav_menu">Menú</a>
-      <a href="#reviews" data-i18n="nav_reviews">Reseñas</a>
-      <a href="#hours" data-i18n="nav_hours">Horario</a>
-      <a href="#findus" data-i18n="nav_visit">Visítanos</a>
-    </div>
     <div class="lang-toggle">
       <button data-lang="es" class="active" title="Español" aria-label="Español">🇲🇽</button>
       <span class="lang-div">|</span>
       <button data-lang="en" title="English" aria-label="English">🇺🇸</button>
     </div>
     <button class="icon-btn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema claro u oscuro">🌙</button>
-    <a href="https://squareup.com/" id="orderLink" class="order-btn" target="_blank" rel="noopener" data-i18n="nav_order">Ordenar</a>
+    <a href="https://barbakanaus.square.site/?location=L327RCPRX9K9Q#XV3M337K7PKMWISD5Z22NMZI" id="orderLink" class="order-btn" target="_blank" rel="noopener" data-i18n="nav_order">Ordenar</a>
   </div>
 </nav>
 
@@ -306,7 +308,7 @@ footer .credit{color:var(--muted);font-size:.72rem;margin-top:22px;opacity:.7}
       <span class="count" data-i18n="hero_reviews">55 reseñas en Google</span>
     </div>
     <div class="hero-cta">
-      <a href="https://squareup.com/" class="btn-fill order-btn" target="_blank" rel="noopener" data-i18n="hero_order">Ordenar Ahora</a>
+      <a href="https://barbakanaus.square.site/?location=L327RCPRX9K9Q#XV3M337K7PKMWISD5Z22NMZI" class="btn-fill order-btn" target="_blank" rel="noopener" data-i18n="hero_order">Ordenar Ahora</a>
       <a href="tel:+13466085329" class="btn-ghost" data-i18n="hero_call">Llamar</a>
     </div>
   </div>
@@ -324,79 +326,79 @@ footer .credit{color:var(--muted);font-size:.72rem;margin-top:22px;opacity:.7}
     <div class="menu-card">
       <h3><span class="ic">🍔</span><span data-i18n="cat1_t">Hamburguesas</span></h3>
       <p class="desc" data-i18n="cat1_p">Clásica o estilo casa: lechuga, tomate, queso fresco, gouda, tocineta y salsas.</p>
-      <div class="item"><span class="iname">Hamburguesa de Carne</span><span class="price">$14.5</span></div>
-      <div class="item"><span class="iname">Hamburguesa de Pollo</span><span class="price">$13.5</span></div>
-      <div class="item"><span class="iname">Doble de Carne</span><span class="price">$19.5</span></div>
-      <div class="item"><span class="iname">Doble de Pollo</span><span class="price">$18.5</span></div>
-      <div class="item"><span class="iname">Mixta Pollo-Carne</span><span class="price">$19.5</span></div>
-      <div class="item"><span class="iname">De Lomo</span><span class="price">$18.5</span></div>
-      <div class="item"><span class="iname">Pollo y Lomo</span><span class="price">$23.5</span></div>
-      <div class="item"><span class="iname">Especial<small>Carne, lomo y pollo</small></span><span class="price">$28.5</span></div>
+      <div class="item"><span class="iname">Hamburguesa de Carne<span class="translit">Beef Burger</span></span><span class="price">$14.50</span></div>
+      <div class="item"><span class="iname">Hamburguesa de Pollo<span class="translit">Chicken Burger</span></span><span class="price">$13.50</span></div>
+      <div class="item"><span class="iname">Doble de Carne<span class="translit">Double Beef</span></span><span class="price">$19.50</span></div>
+      <div class="item"><span class="iname">Doble de Pollo<span class="translit">Double Chicken</span></span><span class="price">$18.50</span></div>
+      <div class="item"><span class="iname">Mixta Pollo-Carne<span class="translit">Chicken &amp; Beef Mix</span></span><span class="price">$19.50</span></div>
+      <div class="item"><span class="iname">De Lomo<span class="translit">Tenderloin Burger</span></span><span class="price">$18.50</span></div>
+      <div class="item"><span class="iname">Pollo y Lomo<span class="translit">Chicken &amp; Tenderloin</span></span><span class="price">$23.50</span></div>
+      <div class="item"><span class="iname">Especial<span class="compo">Carne, lomo y pollo</span><span class="translit">Special — Beef, Tenderloin &amp; Chicken</span></span><span class="price">$28.50</span></div>
     </div>
 
     <div class="menu-card">
       <h3><span class="ic">🫓</span><span data-i18n="cat2_t">Arepas Cabimeras y Patacones</span></h3>
       <p class="desc" data-i18n="cat2_p">Harina o plátano, proteína, repollo, huevo, queso fresco, gouda y salsas.</p>
-      <div class="item"><span class="iname">Carne Mechada</span><span class="price">$16</span></div>
-      <div class="item"><span class="iname">Pollo</span><span class="price">$15</span></div>
-      <div class="item"><span class="iname">Lomo</span><span class="price">$19</span></div>
-      <div class="item"><span class="iname">Pollo y Carne Mechada</span><span class="price">$22.5</span></div>
-      <div class="item"><span class="iname">Lomo y Pollo</span><span class="price">$23.5</span></div>
-      <div class="item"><span class="iname">Especial<small>Carne, lomo y pollo</small></span><span class="price">$28.5</span></div>
+      <div class="item"><span class="iname">Carne Mechada<span class="translit">Shredded Beef</span></span><span class="price">$16.00</span></div>
+      <div class="item"><span class="iname">Pollo<span class="translit">Chicken</span></span><span class="price">$15.00</span></div>
+      <div class="item"><span class="iname">Lomo<span class="translit">Tenderloin</span></span><span class="price">$19.00</span></div>
+      <div class="item"><span class="iname">Pollo y Carne Mechada<span class="translit">Chicken &amp; Shredded Beef</span></span><span class="price">$22.50</span></div>
+      <div class="item"><span class="iname">Lomo y Pollo<span class="translit">Tenderloin &amp; Chicken</span></span><span class="price">$23.50</span></div>
+      <div class="item"><span class="iname">Especial<span class="compo">Carne, lomo y pollo</span><span class="translit">Special — Beef, Tenderloin &amp; Chicken</span></span><span class="price">$28.50</span></div>
     </div>
 
     <div class="menu-card">
       <h3><span class="ic">🥗</span><span data-i18n="cat3_t">Street Bowls</span></h3>
       <p class="desc" data-i18n="cat3_p">Proteína, vegetales, papas, tocineta, pico de gallo y salsas.</p>
-      <div class="item"><span class="iname">Bowl de Pollo</span><span class="price">$14.5</span></div>
-      <div class="item"><span class="iname">Bowl de Carne</span><span class="price">$15</span></div>
-      <div class="item"><span class="iname">Bowl Mixto</span><span class="price">$19.5</span></div>
+      <div class="item"><span class="iname">Bowl de Pollo<span class="translit">Chicken Bowl</span></span><span class="price">$14.50</span></div>
+      <div class="item"><span class="iname">Bowl de Carne<span class="translit">Beef Bowl</span></span><span class="price">$15.00</span></div>
+      <div class="item"><span class="iname">Bowl Mixto<span class="translit">Mixed Bowl</span></span><span class="price">$19.50</span></div>
       <div class="menu-note" data-i18n="cat3_note">Cambia carne por lomo +$4.99</div>
     </div>
 
     <div class="menu-card">
       <h3><span class="ic">🌭</span><span data-i18n="cat4_t">Perros y Panes</span></h3>
       <p class="desc" data-i18n="cat4_p">Pan, salchicha, repollo, papitas, salsas y queso.</p>
-      <div class="item"><span class="iname">Perro Clásico</span><span class="price">$8</span></div>
-      <div class="item"><span class="iname">Salchiqueso</span><span class="price">$9.5</span></div>
-      <div class="item"><span class="iname">Perro Especial</span><span class="price">$9.5</span></div>
-      <div class="item"><span class="iname">Pan de Pollo</span><span class="price">$12</span></div>
-      <div class="item"><span class="iname">Pan de Lomo</span><span class="price">$17.5</span></div>
+      <div class="item"><span class="iname">Perro Clásico<span class="translit">Classic Hot Dog</span></span><span class="price">$8.00</span></div>
+      <div class="item"><span class="iname">Salchiqueso<span class="translit">Sausage &amp; Cheese Dog</span></span><span class="price">$9.50</span></div>
+      <div class="item"><span class="iname">Perro Especial<span class="translit">Special Hot Dog</span></span><span class="price">$9.50</span></div>
+      <div class="item"><span class="iname">Pan de Pollo<span class="translit">Chicken Bread</span></span><span class="price">$12.00</span></div>
+      <div class="item"><span class="iname">Pan de Lomo<span class="translit">Tenderloin Bread</span></span><span class="price">$17.50</span></div>
     </div>
 
     <div class="menu-card">
       <h3><span class="ic">🍟</span><span data-i18n="cat5_t">Papas</span></h3>
       <p class="desc" data-i18n="cat5_p">Papas frescas y cargadas a tu gusto.</p>
-      <div class="item"><span class="iname">Clásicas</span><span class="price">$5</span></div>
-      <div class="item"><span class="iname">Ajo y Parmesano</span><span class="price">$9.5</span></div>
-      <div class="item"><span class="iname">Queso y Tocineta</span><span class="price">$9</span></div>
-      <div class="item"><span class="iname">Con Pollo</span><span class="price">$9.5</span></div>
-      <div class="item"><span class="iname">Con Salchicha</span><span class="price">$9</span></div>
+      <div class="item"><span class="iname">Clásicas<span class="translit">Classic Fries</span></span><span class="price">$5.00</span></div>
+      <div class="item"><span class="iname">Ajo y Parmesano<span class="translit">Garlic Parmesan Fries</span></span><span class="price">$9.50</span></div>
+      <div class="item"><span class="iname">Queso y Tocineta<span class="translit">Cheese &amp; Bacon Fries</span></span><span class="price">$9.00</span></div>
+      <div class="item"><span class="iname">Con Pollo<span class="translit">Chicken Fries</span></span><span class="price">$9.50</span></div>
+      <div class="item"><span class="iname">Con Salchicha<span class="translit">Sausage Fries</span></span><span class="price">$9.00</span></div>
     </div>
 
     <div class="menu-card">
       <h3><span class="ic">🥤</span><span data-i18n="cat6_t">Bebidas y Niños</span></h3>
       <p class="desc" data-i18n="cat6_p">Para acompañar y para los más pequeños.</p>
-      <div class="item"><span class="iname">Coca-Cola / Sprite / Frescolita</span><span class="price">$2.5</span></div>
-      <div class="item"><span class="iname">Papelón</span><span class="price">$4</span></div>
-      <div class="item"><span class="iname">Malta</span><span class="price">$3</span></div>
-      <div class="item"><span class="iname">Ensalada César</span><span class="price">$12.5</span></div>
-      <div class="item"><span class="iname">Deditos de Pollo (Niños)</span><span class="price">$8.5</span></div>
-      <div class="item"><span class="iname">Tequeños (5)</span><span class="price">$7.5</span></div>
+      <div class="item"><span class="iname">Coca-Cola / Sprite / Frescolita</span><span class="price">$2.50</span></div>
+      <div class="item"><span class="iname">Papelón<span class="translit">Sugar Cane Drink</span></span><span class="price">$4.00</span></div>
+      <div class="item"><span class="iname">Malta<span class="translit">Malt Soda</span></span><span class="price">$3.00</span></div>
+      <div class="item"><span class="iname">Ensalada César<span class="translit">Caesar Salad</span></span><span class="price">$12.50</span></div>
+      <div class="item"><span class="iname">Deditos de Pollo (Niños)<span class="translit">Chicken Tenders (Kids)</span></span><span class="price">$8.50</span></div>
+      <div class="item"><span class="iname">Tequeños (5)<span class="translit">Cheese Sticks (5)</span></span><span class="price">$7.50</span></div>
     </div>
 
     <div class="menu-card full">
       <h3><span class="ic">➕</span><span data-i18n="cat7_t">Extras</span></h3>
       <p class="desc" data-i18n="cat7_p">Agrega lo que quieras a tu pedido.</p>
       <div class="extras-grid">
-        <div class="item"><span class="iname">Carne</span><span class="price">$5.5</span></div>
-        <div class="item"><span class="iname">Pollo</span><span class="price">$5</span></div>
-        <div class="item"><span class="iname">Lomo</span><span class="price">$12</span></div>
-        <div class="item"><span class="iname">Chuleta</span><span class="price">$5</span></div>
-        <div class="item"><span class="iname">Tocineta</span><span class="price">$1.5</span></div>
-        <div class="item"><span class="iname">Queso Gouda</span><span class="price">$1.5</span></div>
-        <div class="item"><span class="iname">Queso Blanco</span><span class="price">$3</span></div>
-        <div class="item"><span class="iname">Huevo</span><span class="price">$1.5</span></div>
+        <div class="item"><span class="iname">Carne<span class="translit">Beef Patty</span></span><span class="price">$5.50</span></div>
+        <div class="item"><span class="iname">Pollo<span class="translit">Chicken</span></span><span class="price">$5.00</span></div>
+        <div class="item"><span class="iname">Lomo<span class="translit">Tenderloin</span></span><span class="price">$12.00</span></div>
+        <div class="item"><span class="iname">Chuleta<span class="translit">Pork Chop</span></span><span class="price">$5.00</span></div>
+        <div class="item"><span class="iname">Tocineta<span class="translit">Bacon</span></span><span class="price">$1.50</span></div>
+        <div class="item"><span class="iname">Queso Gouda<span class="translit">Gouda Cheese</span></span><span class="price">$1.50</span></div>
+        <div class="item"><span class="iname">Queso Blanco<span class="translit">White Cheese</span></span><span class="price">$3.00</span></div>
+        <div class="item"><span class="iname">Huevo<span class="translit">Egg</span></span><span class="price">$1.50</span></div>
       </div>
     </div>
 
@@ -420,7 +422,7 @@ footer .credit{color:var(--muted);font-size:.72rem;margin-top:22px;opacity:.7}
   <div class="order-wrap">
     <h2 data-i18n="order_title">Ordena en Línea</h2>
     <p data-i18n="order_p">Pide para llevar o que te lo lleven. Pago seguro con Square.</p>
-    <a href="https://squareup.com/" class="btn-fill order-btn" target="_blank" rel="noopener" data-i18n="order_btn">Ordenar con Square</a>
+    <a href="https://barbakanaus.square.site/?location=L327RCPRX9K9Q#XV3M337K7PKMWISD5Z22NMZI" class="btn-fill order-btn" target="_blank" rel="noopener" data-i18n="order_btn">Ordenar con Square</a>
     <p class="call-line" data-i18n="order_call_p">¿Eventos o pedidos grandes? Llama al <a href="tel:+13466085329">(346) 608-5329</a></p>
   </div>
 </section>
@@ -468,8 +470,27 @@ footer .credit{color:var(--muted);font-size:.72rem;margin-top:22px;opacity:.7}
       <div class="info-block">
         <div class="k" data-i18n="k_follow">Síguenos</div>
         <div class="socials">
-          <a class="soc" href="https://www.instagram.com/barbakana.us/" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
-          <a class="soc" href="https://linktr.ee/barbakanaus" target="_blank" rel="noopener" aria-label="Links">🔗</a>
+          <a class="soc" href="https://www.instagram.com/barbakana.us/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="currentColor" stroke-width="1.8"/>
+              <circle cx="12" cy="12" r="4.3" stroke="currentColor" stroke-width="1.8"/>
+              <circle cx="17.3" cy="6.7" r="1.15" fill="currentColor"/>
+            </svg>
+          </a>
+          <a class="soc" href="https://linktr.ee/barbakanaus" target="_blank" rel="noopener" aria-label="Linktree">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="12" y1="22" x2="12" y2="10" stroke="currentColor" stroke-width="1.8"/>
+              <line x1="12" y1="14" x2="6" y2="9" stroke="currentColor" stroke-width="1.8"/>
+              <line x1="12" y1="14" x2="18" y2="9" stroke="currentColor" stroke-width="1.8"/>
+              <line x1="12" y1="10" x2="7" y2="5" stroke="currentColor" stroke-width="1.8"/>
+              <line x1="12" y1="10" x2="17" y2="5" stroke="currentColor" stroke-width="1.8"/>
+              <circle cx="12" cy="6" r="2.5" fill="currentColor"/>
+              <circle cx="6" cy="9" r="1.7" fill="currentColor"/>
+              <circle cx="18" cy="9" r="1.7" fill="currentColor"/>
+              <circle cx="7" cy="5" r="1.5" fill="currentColor"/>
+              <circle cx="17" cy="5" r="1.5" fill="currentColor"/>
+            </svg>
+          </a>
         </div>
       </div>
     </div>
@@ -613,6 +634,8 @@ const i18n={
 };
 function setLang(lang){
   document.documentElement.lang=lang;
+  document.body.classList.toggle('lang-en', lang==='en');
+  document.body.classList.toggle('lang-es', lang==='es');
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const k=el.getAttribute('data-i18n');
     if(i18n[lang][k]!==undefined) el.innerHTML=i18n[lang][k];
@@ -624,6 +647,7 @@ function setLang(lang){
 document.querySelectorAll('.lang-toggle button').forEach(b=>{
   b.addEventListener('click',()=>setLang(b.dataset.lang));
 });
+document.body.classList.add('lang-es');
 
 /* ============ YEAR ============ */
 document.getElementById('yr').textContent=new Date().getFullYear();
